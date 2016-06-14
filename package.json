@@ -1,6 +1,7 @@
 {
   "name": "react-workshop",
   "version": "0.1.0",
+  "description": "Boilerplate and example application for small ReactJS workshop",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/straku/react-workshop.git"
