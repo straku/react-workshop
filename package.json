@@ -1,0 +1,19 @@
+{
+  "name": "react-workshop",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/straku/react-workshop.git"
+  },
+  "keywords": [
+    "react",
+    "workshop",
+    "shop"
+  ],
+  "author": "Łukasz Strączyński <l.straczynski@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/straku/react-workshop/issues"
+  },
+  "homepage": "https://github.com/straku/react-workshop#readme"
+}
