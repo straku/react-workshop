@@ -1,9 +1,17 @@
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './components/App'
+import MuiTheme from './components/MuiTheme/MuiTheme'
+import App from './components/App/App'
+
+import './styles/fonts.css'
 
 ReactDOM.render(
-  <App />,
+  <MuiTheme>
+    <App />  
+  </MuiTheme>,
   document.getElementById('root')
 )
