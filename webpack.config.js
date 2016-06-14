@@ -2,6 +2,8 @@ const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
+
   entry: [
     './app/index'
   ],
@@ -33,6 +35,10 @@ module.exports = {
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(svg|jpe?g|png)$/,
+        loader: 'file?name=[name].[ext]'
       }
     ]
   }
