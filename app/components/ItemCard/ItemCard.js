@@ -7,17 +7,23 @@ import style from './ItemCard.scss'
 
 class ItemCard extends Component {
   render () {
-    const { item } = this.props
-    const { picture, name, material, price } = item
+    const { item, onClick } = this.props
+    const { id, amount, picture, name, material, price } = item
     const formattedPrice = `$ ${(price / 100).toFixed(2)}`
     return (
       <div className={style.card}>
         <Card>
           <CardMedia overlay={<CardTitle title={name} subtitle={material} />}>
             <img src={picture} />
+            <div className={style.amount}>{amount || ''}</div>
           </CardMedia>
           <CardTitle title={formattedPrice}>
-            <FlatButton className={style.add} primary={true} label="+ ADD" />
+            <FlatButton
+              className={style.add}
+              primary={true}
+              label="+ ADD"
+              onClick={() => onClick(id)}
+            />
           </CardTitle>
         </Card>
       </div>
@@ -26,12 +32,8 @@ class ItemCard extends Component {
 }
 
 ItemCard.propTypes = {
-  item: PropTypes.shape({
-    picture: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    material: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
-  }).isRequired
+  item: PropTypes.object.isRequired,
+  onClick: PropTypes.func
 }
 
 export default ItemCard

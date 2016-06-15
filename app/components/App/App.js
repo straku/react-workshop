@@ -23,11 +23,38 @@ class App extends Component {
     this.items = getSync(6)
 
     this.state = {
-
+      cart: {}
     }
   }
+
+  handleAdd (id) {
+    const { cart } = this.state
+    const updatedCart = Object.assign({}, cart)
+
+    if (cart[id]) {
+      updatedCart[id]++
+    } else {
+      updatedCart[id] = 1
+    }
+
+    this.setState({
+      cart: updatedCart
+    })
+  }
+
+  addAmount (items) {
+    const { cart } = this.state
+    return items.map(item => {
+      return Object.assign({
+        amount: cart[item.id] || 0
+      }, item)
+    })
+  }
+
   render () {
     const { items } = this
+    const { cart } = this.state
+    console.log(cart)
     return (
       <div className={style.app}>
         <nav>
@@ -39,7 +66,10 @@ class App extends Component {
         <article className={style.main}>
           <section className={style.list}>
             <Paper style={paperStyle}>
-              <List items={items}/>
+              <List
+                items={this.addAmount(items)}
+                onAdd={id => this.handleAdd(id)}
+              />
             </Paper>
           </section>
           <section className={style.cart}>

@@ -10,3 +10,14 @@
   top: 16px;
   right: 16px;
 }
+
+.amount {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  text-align: right;
+
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
