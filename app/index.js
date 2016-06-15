@@ -4,8 +4,6 @@ injectTapEventPlugin()
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import 'normalize.css'
-
 import MuiTheme from './components/MuiTheme/MuiTheme'
 import App from './components/App/App'
 

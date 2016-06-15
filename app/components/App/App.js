@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar'
 import PersonIcon from 'material-ui/svg-icons/social/person'
 
 import List from '../List/List'
+import Cart from '../Cart/Cart'
 
 import { getSync, getAsync } from '../../api'
 
@@ -54,7 +55,6 @@ class App extends Component {
   render () {
     const { items } = this
     const { cart } = this.state
-    console.log(cart)
     return (
       <div className={style.app}>
         <nav>
@@ -74,7 +74,10 @@ class App extends Component {
           </section>
           <section className={style.cart}>
             <Paper style={paperStyle}>
-
+              <Cart
+                items={items}
+                amounts={cart}
+              />
             </Paper>
           </section>
         </article>
