@@ -6,17 +6,20 @@ import style from './List.scss'
 
 class List extends Component {
   render () {
-    const { items, onAdd } = this.props
+    const { items, cart, onAdd } = this.props
     return (
       <div className={style.list}>
         {
-          items.map((item, i) => (
-            <ItemCard
-              key={i}
-              item={item}
-              onClick={onAdd}
-            />
-          ))
+          items.map((item, i) => {
+            return (
+              <ItemCard
+                {...item}
+                amount={cart[item.id] || 0}
+                key={i}
+                onClick={onAdd}
+              />
+            )
+          })
         }
       </div>
     )
@@ -26,12 +29,12 @@ class List extends Component {
 List.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    amount: PropTypes.number.isRequired,
     picture: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     material: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired
   })).isRequired,
+  cart: PropTypes.object,
   onAdd: PropTypes.func,
 }
 

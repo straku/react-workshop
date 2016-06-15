@@ -43,12 +43,12 @@ class App extends Component {
     })
   }
 
-  addAmount (items) {
+  handleDelete (id) {
     const { cart } = this.state
-    return items.map(item => {
-      return Object.assign({
-        amount: cart[item.id] || 0
-      }, item)
+    this.setState({
+      cart: Object.assign({}, cart, {
+        [id]: 0
+      })
     })
   }
 
@@ -67,7 +67,8 @@ class App extends Component {
           <section className={style.list}>
             <Paper style={paperStyle}>
               <List
-                items={this.addAmount(items)}
+                items={items}
+                cart={cart}
                 onAdd={id => this.handleAdd(id)}
               />
             </Paper>
@@ -77,6 +78,7 @@ class App extends Component {
               <Cart
                 items={items}
                 amounts={cart}
+                onDelete={id => this.handleDelete(id)}
               />
             </Paper>
           </section>

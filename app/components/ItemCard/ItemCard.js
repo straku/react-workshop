@@ -7,8 +7,7 @@ import style from './ItemCard.scss'
 
 class ItemCard extends Component {
   render () {
-    const { item, onClick } = this.props
-    const { id, amount, picture, name, material, price } = item
+    const { id, amount, picture, name, material, price, onClick } = this.props
     const formattedPrice = `$ ${(price / 100).toFixed(2)}`
     return (
       <div className={style.card}>
@@ -32,8 +31,13 @@ class ItemCard extends Component {
 }
 
 ItemCard.propTypes = {
-  item: PropTypes.object.isRequired,
-  onClick: PropTypes.func
+  id: PropTypes.number.isRequired,
+  amount: PropTypes.number.isRequired,
+  picture: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  material: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default ItemCard
