@@ -5,25 +5,6 @@ import ItemCard from '../ItemCard/ItemCard'
 import style from './List.scss'
 
 class List extends Component {
-  render () {
-    const { items, cart, onAdd } = this.props
-    return (
-      <div className={style.list}>
-        {
-          items.map((item, i) => {
-            return (
-              <ItemCard
-                {...item}
-                amount={cart[item.id] || 0}
-                key={i}
-                onClick={onAdd}
-              />
-            )
-          })
-        }
-      </div>
-    )
-  }
 }
 
 List.propTypes = {

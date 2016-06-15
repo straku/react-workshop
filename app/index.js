@@ -9,10 +9,3 @@ import App from './components/App/App'
 
 import './styles/fonts.css'
 import './styles/main.css'
-
-ReactDOM.render(
-  <MuiTheme>
-    <App />
-  </MuiTheme>,
-  document.getElementById('root')
-)
