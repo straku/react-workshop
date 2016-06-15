@@ -31,17 +31,16 @@ class Cart extends Component {
         <Divider />
         <List>
           {
-            Object.keys(amounts).map(id => {
-              const item = items.find(item => item.id == id)
+            items.map(item => {
+              const { id, name, price } = item
               const amount = amounts[id]
+              if (!amount) return null
               return (
-                (amount)
-                  ? <ListItem
-                      primaryText={item.name}
-                      secondaryText={`${amount} x ${formatPrice(item.price)}`}
-                      rightIcon={<DeleteIcon onClick={() => onDelete(id)} />}
-                    />
-                  : null
+                <ListItem
+                  primaryText={name}
+                  secondaryText={`${amount} x ${formatPrice(item.price)}`}
+                  rightIcon={<DeleteIcon onClick={() => onDelete(id)} />}
+                />
               )
             })
           }
