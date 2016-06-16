@@ -1,8 +1,19 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = !isProd
+
+const productionPlugins = [
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin({
+    compressor: { warnings: false }
+  })
+]
+
 module.exports = {
-  devtool: 'cheap-module-source-map',
+  devtool: isDev ? 'cheap-module-source-map' : null,
 
   entry: [
     './app/index'
@@ -15,7 +26,7 @@ module.exports = {
 
   plugins: [
     new HtmlPlugin({ template: './static/index.html' })
-  ],
+  ].concat(isProd ? productionPlugins : []),
 
   module: {
     loaders: [
