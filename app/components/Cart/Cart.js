@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
@@ -8,11 +9,12 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import { formatPrice } from '../../utils'
 
+import { removeFromCart } from '../../actions'
+
 import style from './Cart.scss'
 
-class Cart extends Component {
-  getSum () {
-    const { items, amounts } = this.props
+function Cart ({ items, amounts, dispatch }) {
+  const getSum = () => {
     let sum = 0
     items.forEach(item => {
       const { id, price } = item
@@ -21,39 +23,36 @@ class Cart extends Component {
     return formatPrice(sum)
   }
 
-  render () {
-    const { items, amounts, onDelete } = this.props
-    return (
-      <div className={style.list}>
-        <List>
-          <ListItem primaryText={`Cart value: ${this.getSum()}`} leftIcon={<MoneyIcon />} />
-        </List>
-        <Divider />
-        <List>
-          {
-            items.map(item => {
-              const { id, name, price } = item
-              const amount = amounts[id]
-              if (!amount) return null
-              return (
-                <ListItem
-                  primaryText={name}
-                  secondaryText={`${amount} x ${formatPrice(item.price)}`}
-                  rightIcon={<DeleteIcon onClick={() => onDelete(id)} />}
-                />
-              )
-            })
-          }
-        </List>
-      </div>
-    )
-  }
+  return (
+    <div className={style.list}>
+      <List>
+        <ListItem primaryText={`Cart value: ${getSum()}`} leftIcon={<MoneyIcon />} />
+      </List>
+      <Divider />
+      <List>
+        {
+          items.map((item, i) => {
+            const { id, name, price } = item
+            const amount = amounts[id]
+            if (!amount) return null
+            return (
+              <ListItem
+                key={id}
+                primaryText={name}
+                secondaryText={`${amount} x ${formatPrice(item.price)}`}
+                rightIcon={<DeleteIcon onClick={() => dispatch(removeFromCart(id))} />}
+              />
+            )
+          })
+        }
+      </List>
+    </div>
+  )
 }
 
 Cart.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
-  amounts: PropTypes.object,
-  onDelete: PropTypes.func
+  amounts: PropTypes.object
 }
 
-export default Cart
+export default connect()(Cart)

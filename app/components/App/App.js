@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Paper from 'material-ui/Paper'
 import AppBar from 'material-ui/AppBar'
 
-import PersonIcon from 'material-ui/svg-icons/social/person'
-
 import List from '../List/List'
 import Cart from '../Cart/Cart'
 
-import { getSync, getAsync } from '../../api'
+import { getList } from '../../actions'
 
 import style from './App.scss'
 
@@ -18,43 +17,13 @@ const paperStyle = {
 }
 
 class App extends Component {
-  constructor () {
-    super()
-
-    this.items = getSync(6)
-
-    this.state = {
-      cart: {}
-    }
-  }
-
-  handleAdd (id) {
-    const { cart } = this.state
-    const updatedCart = Object.assign({}, cart)
-
-    if (cart[id]) {
-      updatedCart[id]++
-    } else {
-      updatedCart[id] = 1
-    }
-
-    this.setState({
-      cart: updatedCart
-    })
-  }
-
-  handleDelete (id) {
-    const { cart } = this.state
-    this.setState({
-      cart: Object.assign({}, cart, {
-        [id]: 0
-      })
-    })
+  componentDidMount () {
+    const { dispatch } = this.props
+    dispatch(getList())
   }
 
   render () {
-    const { items } = this
-    const { cart } = this.state
+    const { loader, items, cart } = this.props
     return (
       <div className={style.app}>
         <nav>
@@ -66,11 +35,14 @@ class App extends Component {
         <article className={style.main}>
           <section className={style.list}>
             <Paper style={paperStyle}>
-              <List
-                items={items}
-                cart={cart}
-                onAdd={id => this.handleAdd(id)}
-              />
+              {
+                (loader)
+                  ? 'Loading list...'
+                  : <List
+                      items={items}
+                      cart={cart}
+                    />
+              }
             </Paper>
           </section>
           <section className={style.cart}>
@@ -78,7 +50,6 @@ class App extends Component {
               <Cart
                 items={items}
                 amounts={cart}
-                onDelete={id => this.handleDelete(id)}
               />
             </Paper>
           </section>
@@ -88,4 +59,12 @@ class App extends Component {
   }
 }
 
-export default App
+function select (state) {
+  return {
+    loader: state.list.loader,
+    items: state.list.data,
+    cart: state.cart
+  }
+}
+
+export default connect(select)(App)
