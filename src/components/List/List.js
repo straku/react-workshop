@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react'
 
 import ItemCard from '../ItemCard/ItemCard'
 
-import style from './List.scss'
+import './List.css'
 
 function List ({ items, cart }) {
   return (
-    <div className={style.list}>
+    <div className="list">
       {
         items.map((item, i) => {
           return (

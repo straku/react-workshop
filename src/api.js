@@ -1,4 +1,7 @@
-import _ from 'lodash'
+import range from 'lodash/range'
+import random from 'lodash/random'
+import sample from 'lodash/sample'
+const _ = { range, random, sample }
 
 const randomDescriptions = [
   { name: 'Leather Chelsea Shoes', material: '100% Leather' },

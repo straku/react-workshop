@@ -3,15 +3,17 @@ import { connect } from 'react-redux'
 
 import Paper from 'material-ui/Paper'
 import AppBar from 'material-ui/AppBar'
+import Loader from 'material-ui/CircularProgress'
 
 import List from '../List/List'
 import Cart from '../Cart/Cart'
 
 import { getList } from '../../actions'
 
-import style from './App.scss'
+import './App.css'
 
 const paperStyle = {
+  position: 'relative',
   width: '100%',
   minHeight: '100%'
 }
@@ -25,32 +27,26 @@ class App extends Component {
   render () {
     const { loader, items, cart } = this.props
     return (
-      <div className={style.app}>
+      <div className="app">
         <nav>
           <AppBar
             title="SuperShop"
             showMenuIconButton={false}
           />
         </nav>
-        <article className={style.main}>
-          <section className={style.list}>
+        <article className="main">
+          <section className="list">
             <Paper style={paperStyle}>
               {
                 (loader)
-                  ? 'Loading list...'
-                  : <List
-                      items={items}
-                      cart={cart}
-                    />
+                  ? <Loader className="loader" style={{ position: 'absolute' }} />
+                  : <List items={items} cart={cart} />
               }
             </Paper>
           </section>
-          <section className={style.cart}>
+          <section className="cart">
             <Paper style={paperStyle}>
-              <Cart
-                items={items}
-                amounts={cart}
-              />
+              <Cart items={items}  amounts={cart} />
             </Paper>
           </section>
         </article>

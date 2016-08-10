@@ -11,8 +11,6 @@ import { formatPrice } from '../../utils'
 
 import { removeFromCart } from '../../actions'
 
-import style from './Cart.scss'
-
 function Cart ({ items, amounts, dispatch }) {
   const getSum = () => {
     let sum = 0
@@ -24,7 +22,7 @@ function Cart ({ items, amounts, dispatch }) {
   }
 
   return (
-    <div className={style.list}>
+    <div>
       <List>
         <ListItem primaryText={`Cart value: ${getSum()}`} leftIcon={<MoneyIcon />} />
       </List>
@@ -39,7 +37,7 @@ function Cart ({ items, amounts, dispatch }) {
               <ListItem
                 key={id}
                 primaryText={name}
-                secondaryText={`${amount} x ${formatPrice(item.price)}`}
+                secondaryText={`${amount} x ${formatPrice(price)}`}
                 rightIcon={<DeleteIcon onClick={() => dispatch(removeFromCart(id))} />}
               />
             )

@@ -22,7 +22,7 @@ function getListSuccess (list) {
 export function getList () {
   return dispatch => {
     dispatch(getListRequest())
-    getAsync(6)
+    getAsync(8)
       .then(list => dispatch(getListSuccess(list)))
   }
 }

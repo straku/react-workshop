@@ -1,27 +1,28 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import { Card, CardMedia, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
 import { addToCart } from '../../actions'
 
-import style from './ItemCard.scss'
+import './ItemCard.css'
 
 function ItemCard ({ id, amount, picture, name, material, price, dispatch }) {
   const formattedPrice = `$ ${(price / 100).toFixed(2)}`
   return (
-    <div className={style.card}>
+    <div className="card">
       <Card>
         <CardMedia overlay={<CardTitle title={name} subtitle={material} />}>
-          <img src={picture} />
-          <div className={style.amount}>{amount || ''}</div>
+          <img src={picture} role="presentation" />
+          <div className="amount">{amount || ''}</div>
         </CardMedia>
         <CardTitle title={formattedPrice}>
           <FlatButton
-            className={style.add}
+            className="add"
             primary={true}
             label="+ ADD"
+            style={{ position: 'absolute' }}
             onClick={() => dispatch(addToCart(id))}
           />
         </CardTitle>
